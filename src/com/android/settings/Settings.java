@@ -97,6 +97,8 @@ import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
+import com.cyanogenmod.settings.device.DeviceSettings
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -364,6 +366,7 @@ public class Settings extends PreferenceActivity
         KeyboardLayoutPickerFragment.class.getName(),
         BlacklistSettings.class.getName(),
         ApnSettings.class.getName()
+        DeviceSettings.class.getName()
     };
 
     @Override
