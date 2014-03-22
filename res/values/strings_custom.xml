@@ -454,22 +454,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="adb_paranoid">ADB Paranoia Mode</string>
     <string name="adb_paranoid_summary">Immediately reboot if an unknown computer is connected while device is locked</string>
 
-    <!-- Volume steps options -->
-    <string name="live_volume_title">Live volume steps</string>
-    <string name="volume_steps_60">60</string>
-    <string name="volume_steps_45">45</string>
-    <string name="volume_steps_30">30</string>
-    <string name="volume_steps_15">15</string>
-    <string name="volume_steps_7">7</string>
-    <string name="volume_steps_5">5</string>
-    <string name="volume_steps_alarm_title">Volume steps: Alarm</string>
-    <string name="volume_steps_dtmf_title">Volume steps: DTMF</string>
-    <string name="volume_steps_music_title">Volume steps: Music</string>
-    <string name="volume_steps_notification_title">Volume steps: Notification</string>
-    <string name="volume_steps_ring_title">Volume steps: Ringer</string>
-    <string name="volume_steps_system_title">Volume steps: System</string>
-    <string name="volume_steps_voice_call_title">Volume steps: Voice Call</string>
-
     <!-- Volume panel time out -->
     <string name="volume_panel_timeout_title">Timeout</string>
     <string name="volume_panel_timeout_summary">Volume panel timeout</string>
@@ -506,5 +490,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Swap volume buttons -->
     <string name="swap_vol_buttons_title">Swap vol buttons on rotation</string>
     <string name="swap_vol_buttons_title_summary">Swap volume buttons when the screen is rotated by 90 or 180 degrees.</string>
+
+    <!-- Sound themes -->
+    <string name="sound_packages_title">Sound packs</string>
+    <string name="install_sound_pack_title">Install sound pack</string>
+    <string name="install_sound_pack_summary">Install new sound packs added in SoundPacks folder on the internal storage</string>
+    <string name="select_sound_pack_title">Select sound pack</string>
+    <string name="select_sound_pack_summary">Select the active sound pack</string>
+    <string name="default_sound_pack">Default (System)</string>
+    <string name="error_pack_install">Error while installing the sound pack</string>
 
 </resources>

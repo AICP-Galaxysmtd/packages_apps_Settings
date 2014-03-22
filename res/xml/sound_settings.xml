@@ -26,11 +26,6 @@
             android:persistent="false"
             android:streamType="ring" />
 
-    <PreferenceScreen
-            android:key="live_volume_settings"
-            android:title="@string/live_volume_title"
-            android:fragment="com.android.settings.LiveVolume" />
-
     <com.android.settings.widget.SeekBarPreferenceCham
             android:key="volume_panel_timeout"
             android:title="@string/volume_panel_timeout_title"
@@ -64,6 +59,11 @@
             android:dialogTitle="@string/ringtone_title"
             android:persistent="false"
             android:ringtoneType="ringtone" />
+
+    <PreferenceScreen
+        android:key="sound_packages"
+        android:fragment="com.android.settings.sounds.SoundPackageSettings"
+        android:title="@string/sound_packages_title" />
 
     <com.android.settings.aicp.IncreasingRingPreference
             android:key="increasing_ring"

@@ -42,7 +42,6 @@ import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
@@ -465,6 +464,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.MODE_VOLUME_OVERLAY, value);
             mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
+
         } else if (preference == mVolumePanelTimeout) {
             int volumePanelTimeout = (Integer) objValue;
             Settings.System.putInt(getContentResolver(),
