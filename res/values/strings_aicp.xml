@@ -809,10 +809,10 @@
     <string name="kerneltweaker_settings_title">Kernel Tweaker</string>
 
     <!-- AICP OTA -->
-    <string name="aicp_ota_settings_title">Aicp OTA</string>
+    <string name="aicp_ota_settings_title">AICP OTA</string>
 
     <!-- Text for forcing expanded notifications -->
-    <string name="disable_fc_notifications_title">Diable FC Notifications</string>
+    <string name="disable_fc_notifications_title">Disable FC Notifications</string>
     <string name="disable_fc_notifications_summary">This will hide all force close notificaitons</string>
 
     <!-- Text for Misc Tweaks entry -->
@@ -919,5 +919,55 @@
     <!-- Custom notif header -->
     <string name="custom_statusbar_header_title">Contextual notification panel header</string>
     <string name="custom_statusbar_header_summary">Sets the background of the notification panel header to an image based on the current date and time</string>
+
+    <!-- Status bar color -->
+    <string name="custom_status_bar_header_title">System bars color</string>
+    <string name="custom_status_bar_color_title">Custom system bars color</string>
+    <string name="status_bar_opaque_color">Opaque color</string>
+    <string name="status_bar_transparent_color">Dimmed color</string>
+    <string name="status_bar_color_reset">Reset status bar color</string>
+    <string name="restart_status_bar_menu_title">Restart status bar</string>
+    <string name="restart_status_bar_title">Restart?</string>
+    <string name="restart_status_bar_message">Restarting the System UI will significally change the values you modify.</string>
+    <string name="custom_system_icon_color_title">Custom system icon color</string>
+    <string name="system_icon_color">Icon color</string>
+    <string name="custom_color_summary">Override the system color of the System UI</string>
+    <string name="custom_status_bar_apply_title">Apply</string>
+    <string name="custom_status_bar_apply_summary">Restart SystemUI to apply changes to\nthe system bars colors.</string>
+
+    <!-- Statusbar date -->
+    <string name="clock_date_display_title">Status bar date</string>
+    <string name="clock_date_display">Date</string>
+    <string name="clock_date_display_summary">Display custom date before the clock</string>
+    <string name="clock_date_style">Date style</string>
+    <string name="clock_date_format">Date format</string>
+    <string name="clock_date_string_edittext_title">Must be in DateFormat eg. MM/dd/yy</string>
+    <string name="clock_date_string_edittext_summary">Enter string</string>
+    <string name="clock_date_display_none">Don\'t show</string>
+    <string name="clock_date_display_small">Small font size</string>
+    <string name="clock_date_display_normal">Normal font size</string>
+    <string name="clock_date_style_normal">Normal</string>
+    <string name="clock_date_style_lowercase">Lowercase</string>
+    <string name="clock_date_style_uppercase">Uppercase</string>
+    <string name="clock_date_format_custom">Custom java format</string>
+
+    <!-- Lockscreen widget frame -->
+    <string name="lockscreen_widget_frame_title">Disable widget frames</string>
+    <string name="lockscreen_widget_frame_summary">Disable widget background frames</string>
+
+    <!-- Lockscreen hw buttons -->
+    <string name="hwbutton_category_title">HW button actions</string>
+    <string name="lockscreen_buttons_title">Button actions</string>
+    <string name="lockscreen_buttons_summary">View or change lock screen button actions</string>
+    <string name="lockscreen_long_press_back_title">Long press Back button</string>
+    <string name="lockscreen_long_press_home_title">Long press Home button</string>
+    <string name="lockscreen_long_press_menu_title">Long press Menu button</string>
+    <string name="lockscreen_buttons_no_action">No action</string>
+    <string name="lockscreen_buttons_flashlight">Flashlight</string>
+    <string name="lockscreen_buttons_next">Next song</string>
+    <string name="lockscreen_buttons_previous">Previous song</string>
+    <string name="lockscreen_buttons_playpause">Play/Pause music</string>
+    <string name="lockscreen_buttons_toggle_sound">Toggle sound</string>
+    <string name="lockscreen_buttons_sleep">Go to sleep</string>
 
 </resources>

@@ -139,6 +139,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
 
+    private static final String ENABLE_QUICKBOOT_KEY = "enable_quickboot";
+    private static final String QUICKBOOT_PACKAGE_NAME = "com.qapp.quickboot";
+
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -154,6 +157,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
+
+    private static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
 
     private static final int RESULT_DEBUG_APP = 1000;
 
@@ -179,6 +184,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mDimScreenWhilePLugged;
     private CheckBoxPreference mBtHciSnoopLog;
+    private CheckBoxPreference mQuickBoot;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
 
@@ -216,6 +222,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mShowAllANRs;
 
     private CheckBoxPreference mDevelopmentShortcut;
+
+    private ListPreference mMSOB;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
@@ -275,10 +283,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
         mDimScreenWhilePLugged = findAndInitCheckboxPref(DIM_SCREEN_WHILE_PLUGGED);
         mBtHciSnoopLog = findAndInitCheckboxPref(BT_HCI_SNOOP_LOG);
+        mQuickBoot = findAndInitCheckboxPref(ENABLE_QUICKBOOT_KEY);
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
         mDevelopmentShortcut = findAndInitCheckboxPref(DEVELOPMENT_SHORTCUT_KEY);
+
+        mMSOB = (ListPreference) findPreference(MEDIA_SCANNER_ON_BOOT);
+        mAllPrefs.add(mMSOB);
+        mMSOB.setOnPreferenceChangeListener(this);
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -287,6 +300,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
             disableForUser(mDevelopmentShortcut);
+            disableForUser(mQuickBoot);
+        }
+
+        if (!isPackageInstalled(getActivity(), QUICKBOOT_PACKAGE_NAME)) {
+            removePreference(mQuickBoot);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -504,6 +522,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateAdbOverNetwork();
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
+        updateCheckBox(mQuickBoot, Settings.Global.getInt(cr,
+                Settings.Global.ENABLE_QUICKBOOT, 0) != 0);
         updateRuntimeValue();
         updateHdcpValues();
         updatePasswordSummary();
@@ -533,6 +553,26 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateForceRtlOptions();
         updateWifiDisplayCertificationOptions();
         updateDevelopmentShortcutOptions();
+        updateMSOBOptions();
+    }
+
+    private void resetMSOBOptions() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+    }
+
+    private void writeMSOBOptions(Object newValue) {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT,
+                Integer.valueOf((String) newValue));
+        updateMSOBOptions();
+    }
+
+    private void updateMSOBOptions() {
+        int value = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+        mMSOB.setValue(String.valueOf(value));
+        mMSOB.setSummary(mMSOB.getEntry());
     }
 
     private void resetDevelopmentShortcutOptions() {
@@ -561,6 +601,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
         }
         resetDebuggerOptions();
+        resetMSOBOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -1296,6 +1337,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mQuickBoot) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ENABLE_QUICKBOOT,
+                    mQuickBoot.isChecked() ? 1 : 0);
         } else if (preference == mDebugAppPref) {
             startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
@@ -1403,6 +1448,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
+            return true;
+        } else if (preference == mMSOB) {
+            writeMSOBOptions(newValue);
             return true;
         }
         return false;
